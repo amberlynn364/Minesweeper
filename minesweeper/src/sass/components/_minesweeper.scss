@@ -1,0 +1,95 @@
+@import '../abstracts';
+
+
+.game-wrapper {
+  padding: 15px;
+  background-color: $color-background-minesweeper;
+  border-radius: 10px;
+  @media (max-width: 1240px) {
+    max-width: 900px;
+  }
+  @media (max-width: 960px) {
+    max-width: 600px;
+  }
+  @media (max-width: 680px) {
+    max-width: 450px;
+  }
+  .row {
+    display: flex;
+    .cell {
+      @include flex-center;
+      width: 35px;
+      height: 25px;
+      padding: 10px 5px 5px 5px;
+      border: $color-cell-border;
+      text-align: center;
+      box-shadow: $color-cell-box-shadow;
+      cursor: pointer;
+      transition-property: background-color, box-shadow;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-out;
+      @media (max-width: 960px ) {
+        width: 10px;
+        height: 10px;
+      }
+      @media (max-width: 680px ) {
+        width: 5px;
+        height: 5px;
+      }
+      &.revealed {
+        background-color: $color-cell-revealed;
+        box-shadow: none;
+        transition: 0.3s;
+      }
+      &.value-M {
+        background-color: $color-cell-mine;
+        &:after {
+          content: '';
+          width: 30px;
+          height: 30px;
+          background-size: cover;
+          background-image: url('../assets/svg/bomb.svg');
+          @media (max-width: 960px ) {
+            width: 10px;
+            height: 10px;
+          }
+          @media (max-width: 680px ) {
+            width: 5px;
+            height: 5px;
+          }
+        }
+      }
+      &.flagged {
+        &:after {
+          content: '';
+          width: 20px;
+          height: 20px;
+          background-size: cover;
+          background-image: url('../assets/svg/flag.svg');
+          @media (max-width: 960px ) {
+            width: 10px;
+            height: 10px;
+          }
+          @media (max-width: 680px ) {
+            width: 5px;
+            height: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+body.dark .game-wrapper {
+  background-color: $color-background-minesweeper-dark;
+  .cell {
+    border: $color-cell-border-dark;
+    box-shadow: $color-cell-box-shadow-dark;
+    &.revealed {
+      background-color: $color-cell-revealed-dark;
+      &.value-M {
+        background-color: $color-cell-mine-dark;
+      }
+    }
+  }
+}
